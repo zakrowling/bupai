@@ -56,7 +56,7 @@ body.show-chatbot #chatbot-toggler span:last-child {
   width: 600px;
   overflow: hidden;
   background: #fff;
-  border-radius: 15px;
+  border-radius: 8px;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.2);
@@ -164,7 +164,7 @@ body.show-chatbot .chatbot-popup {
 
 .chat-body .bot-message .message-text {
   background: #ececec;
-  border-radius: 13px 13px 13px 3px;
+  border-radius: 12px 12px 12px 2px;
 }
 
 .chat-body .user-message {
@@ -175,13 +175,13 @@ body.show-chatbot .chatbot-popup {
 .chat-body .user-message .message-text {
   color: #fff;
   background: #0079C8;
-  border-radius: 13px 13px 3px 13px;
+  border-radius: 12px 12px 2px 12px;
 }
 
 .chat-body .user-message .attachment {
   width: 50%;
   margin-top: -7px;
-  border-radius: 13px 3px 13px 13px;
+  border-radius: 12px 2px 12px 12px;
 }
 
 .chat-body .bot-message .thinking-indicator {
@@ -241,7 +241,7 @@ body.show-chatbot .chatbot-popup {
   align-items: center;
   position: relative;
   background: #fff;
-  border-radius: 32px;
+  border-radius: 4px;
   outline: 1px solid #CCCCE5;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
   transition: 0s ease, border-radius 0s;
