@@ -154,8 +154,8 @@ body.show-chatbot .chatbot-popup {
 .chat-body .message .message-text {
   padding: 12px 16px;
   max-width: 75%;
-  font-size: 0.85rem;
-  line-height: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
 }
 
 .chat-body .message a {
