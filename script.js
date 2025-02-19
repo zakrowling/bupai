@@ -125,12 +125,28 @@ const generateBotResponse = (incomingMessageDiv) => {
         });
     }
 
-    if (userData.message) {
-        chatHistory.push({
-            role: "user",
-            parts: [{ text: userData.message }, ...(userData.file.data ? [{ inline_data: userData.file }] : [])],
-        });
-        userData.message = null;
+    if (userData.message || (userData.file && userData.file.data)) { // Check for either message or file
+      const parts = [];
+
+      if (userData.message) {
+          parts.push({ text: userData.message });
+      }
+
+      if (userData.file && userData.file.data) {
+          parts.push({
+              inline_data: {
+                  data: userData.file.data,
+                  mime_type: userData.file.mime_type,
+              },
+          });
+          userData.file = {}; // Clear file data after sending
+      }
+
+      chatHistory.push({
+          role: "user",
+          parts: parts, // Use the constructed parts array
+      });
+      userData.message = null; // Clear message after sending
     }
 
     const geminiRequest = {
@@ -155,23 +171,21 @@ const handleOutgoingMessage = (e) => {
   messageInput.value = "";
   messageInput.dispatchEvent(new Event("input"));
 
-  // Check if the file has already been sent in a previous message
-  const showFile = userData.file && userData.file.data && !userData.file.sent;
-
-  const messageContent = `<div class="message-text"></div>${showFile ? `<img src="data:${userData.file.mime_type};base64,${userData.file.data}" class="attachment" />` : ""}`;
-
+  const messageContent = `<div class="message-text"></div>`; // Simplified
   const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
   outgoingMessageDiv.querySelector(".message-text").innerText = userData.message;
   chatBody.appendChild(outgoingMessageDiv);
-  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
+  chatBody.scrollTo({top: chatBody.scrollHeight, behavior: "smooth"});
 
-  if (showFile) {
-      userData.file.sent = true;  // Mark the file as sent
-      fileUploadWrapper.classList.remove("file-uploaded"); // Hide the preview after sending
-      fileUploadWrapper.querySelector("img").src = ""; // Clear the preview
-      userData.file = {}; // Optionally clear file data if you don't need it anymore
+  if (userData.file && userData.file.data) {  // If there's a file
+      const imgElement = document.createElement('img');
+      imgElement.src = `data:${userData.file.mime_type};base64,${userData.file.data}`;
+      imgElement.classList.add('attachment');
+      outgoingMessageDiv.appendChild(imgElement);
+
+      fileUploadWrapper.classList.remove("file-uploaded");
+      fileUploadWrapper.querySelector("img").src = "";
   }
-
   setTimeout(() => {
       const botMessageContent = `<img class="bot-avatar" src="https://prod11-sprcdn-assets.sprinklr.com/11000004/40cb3338-1d3b-45d0-9594-56aed148e1b9-493754308/Brand_logo_3x_p.png" alt="Chatbot Logo" width="50" height="50"><div class="message-text"><div class="thinking-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
 
