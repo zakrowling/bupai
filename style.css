@@ -185,6 +185,7 @@ body.show-chatbot .chatbot-popup {
 .chat-body .user-message .attachment {
   width: 50%;
   margin-top: -7px;
+  border: 1px #F1EFEB solid;
   border-radius: 12px 2px 12px 12px;
 }
 
