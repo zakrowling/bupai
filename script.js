@@ -200,7 +200,7 @@ const handleOutgoingMessage = (e) => {
 messageInput.addEventListener("input", () => {
   messageInput.style.height = `${initialInputHeight}px`;
   messageInput.style.height = `${messageInput.scrollHeight}px`;
-  document.querySelector(".chat-form").style.borderRadius = messageInput.scrollHeight > initialInputHeight ? "8px" : "8px";
+  document.querySelector(".chat-form").style.borderRadius = messageInput.scrollHeight > initialInputHeight ? "4px" : "4px";
 });
 
 // Handle Enter key press for sending messages
