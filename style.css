@@ -159,8 +159,13 @@ body.show-chatbot .chatbot-popup {
   line-height: 1.25rem;
 }
 
-.chat-body .message a {
+.chat-body .message a:link,
+.chat-body .message a:visited {
   color: #0079C8; 
+}
+
+.chat-body .message a:hover {
+  color: #0652ae;
 }
 
 .chat-body .bot-message.thinking .message-text {
